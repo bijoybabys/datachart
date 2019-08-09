@@ -1,5 +1,6 @@
 /home/bijoy/Spring-Boot/datachart/src/main/java/com/holics/datachart/service/DataChartServiceImpl.java
 /home/bijoy/Spring-Boot/datachart/src/main/java/com/holics/datachart/service/entity/ResponseData.java
+/home/bijoy/Spring-Boot/datachart/src/main/java/com/holics/datachart/dao/Data.java
 /home/bijoy/Spring-Boot/datachart/src/main/java/com/holics/datachart/DatachartApplication.java
 /home/bijoy/Spring-Boot/datachart/src/main/java/com/holics/datachart/service/entity/AuthenticationRequest.java
 /home/bijoy/Spring-Boot/datachart/src/main/java/com/holics/datachart/controller/DataChartController.java

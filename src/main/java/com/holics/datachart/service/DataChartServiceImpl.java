@@ -1,8 +1,5 @@
 package com.holics.datachart.service;
 
-import java.util.HashMap;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +30,7 @@ public class DataChartServiceImpl implements DataChartService {
 	}
 
 	@Override
-	public List<HashMap<String, Object>> getUserData(String userId) {
+	public String getUserData(int userId) {
 		return dataChartDao.getUserData(userId);
 
 	}

@@ -1,8 +1,5 @@
 package com.holics.datachart.dao;
 
-import java.util.HashMap;
-import java.util.List;
-
 import com.holics.datachart.service.entity.AuthenticationRequest;
 
 public interface DataChartDao {
@@ -13,6 +10,6 @@ public interface DataChartDao {
 
 	User register(User user);
 
-	List<HashMap<String, Object>> getUserData(String userId);
+	String getUserData(int userId);
 
 }

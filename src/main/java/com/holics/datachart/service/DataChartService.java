@@ -1,8 +1,5 @@
 package com.holics.datachart.service;
 
-import java.util.HashMap;
-import java.util.List;
-
 import com.holics.datachart.dao.User;
 import com.holics.datachart.service.entity.AuthenticationRequest;
 
@@ -14,6 +11,6 @@ public interface DataChartService {
 
 	User register(User user);
 
-	List<HashMap<String, Object>> getUserData(String userId);
+	String getUserData(int userId);
 
 }

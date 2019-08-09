@@ -1,24 +1,24 @@
 package com.holics.datachart.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import javax.websocket.server.PathParam;
+import java.io.IOException;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.holics.datachart.dao.User;
 import com.holics.datachart.service.DataChartService;
 import com.holics.datachart.service.entity.AuthenticationRequest;
 import com.holics.datachart.service.entity.ResponseData;
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping(value = "api/datachart")
 public class DataChartController {
@@ -32,9 +32,10 @@ public class DataChartController {
 		User user = datachartService.authenticate(authenticationRequest);
 		if (user != null) {
 			response.put("userId", user.getUserId());
-			response.put("message", "Login successfull");
+			response.put("userName", user.getUserName());
+			response.put("message", "success");
 		} else {
-			response.put("message", "Login failed");
+			response.put("message", "failed");
 		}
 		return ResponseEntity.ok(response);
 
@@ -55,10 +56,20 @@ public class DataChartController {
 	}
 
 	@GetMapping("/{userId}")
-	public List<HashMap<String, Object>> getUserData(@PathParam("userId") String userId) {
-		List<HashMap<String, Object>> dataList = new ArrayList<>();
-		dataList = datachartService.getUserData(userId);
-		return dataList;
+	public ResponseEntity<ResponseData>  getUserData(@PathVariable("userId") String userId) {
+		ResponseData response = new ResponseData();
+		ObjectMapper objectMapper = new ObjectMapper();
+		String jsonData = datachartService.getUserData(Integer.parseInt(userId));
+		Map<String, Object> data = null;
+		try {
+			data = objectMapper.readValue(jsonData, Map.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		response.put("data", data);
+		return ResponseEntity.ok(response);
+
 
 	}
 

@@ -1,15 +1,10 @@
 package com.holics.datachart.dao;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import javax.persistence.EntityManagerFactory;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -56,19 +51,11 @@ public class DataChartDaoImpl implements DataChartDao {
 	}
 
 	@Override
-	public List<HashMap<String, Object>> getUserData(String userId) {
+	public String getUserData(int userId) {
 
-		List<HashMap<String, Object>> dataList = new ArrayList<HashMap<String, Object>>();
-		HashMap<String, Object> dataGrap1 = new HashMap<>();
-
-		JSONObject jo = new JSONObject();
-		jo.put("name", "jon doe");
-		jo.put("age", "22");
-		jo.put("city", "chicago");
-
-		dataGrap1.put("graph1", jo);
-		dataList.add(dataGrap1);
-		return dataList;
+		Criteria criteria = this.sessionFactory.openSession().createCriteria(Data.class);
+		criteria.add(Restrictions.eq("userId", userId));
+		return (String) ((Data)criteria.uniqueResult()).getData();
 	}
 	
 
