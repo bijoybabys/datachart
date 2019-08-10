@@ -26,6 +26,14 @@ public class DataChartController {
 	@Autowired
 	DataChartService datachartService;
 
+	@GetMapping("/healthcheck")
+	public ResponseEntity<ResponseData> healthCheck() {
+		
+		ResponseData response = new ResponseData();
+		response.put("message", "success");
+		return ResponseEntity.ok(response);
+	}
+
 	@PostMapping("/login")
 	public ResponseEntity<ResponseData> authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
 		ResponseData response = new ResponseData();
